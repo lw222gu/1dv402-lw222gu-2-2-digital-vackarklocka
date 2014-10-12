@@ -18,25 +18,49 @@ namespace _1dv402.S2.L02A
         public int AlarmHour
         {
             get { return _alarmHour;  }
-            set { _alarmHour = value; }
+            set {
+                    if (_alarmHour < 0 || _alarmHour > 23)
+                    {
+                        throw new ArgumentException();
+                    } 
+                    _alarmHour = value; 
+                }
         }
 
         public int AlarmMinute
         {
             get { return _alarmMinute; }
-            set { _alarmMinute = value; }
+            set {
+                    if (_alarmMinute < 0 || _alarmMinute > 59)
+                    {
+                        throw new ArgumentException();
+                    }
+                    _alarmMinute = value; 
+                }
         }
 
         public int Hour
         {
             get { return _hour; }
-            set { _hour = value; }
+            set {
+                    if (_hour < 0 || _hour > 23)
+                    {
+                        throw new ArgumentException();
+                    }
+                    _hour = value; 
+                }
         }
 
         public int Minute
         {
             get { return _minute; }
-            set { _minute = value; }
+            set {
+                    if (_minute < 0 || _minute > 59)
+                    {
+                        throw new ArgumentException();
+                    }
+                    _minute = value; 
+                }
         }
 
         //Constructors
