@@ -66,21 +66,55 @@ namespace _1dv402.S2.L02A
         //Constructors
 
         public AlarmClock()
+            :this(0,0)
         { 
         }
 
         public AlarmClock(int hour, int minute)
+            :this(hour, minute, 0, 0)
         { 
         }
 
         public AlarmClock(int hour, int minute, int alarmHour, int alarmMinute)
-        { 
+        {
+            hour = Hour;
+            minute = Minute;
+            alarmHour = AlarmHour;
+            alarmMinute = AlarmMinute;
         }
 
         //Methods
 
         public bool TickTock()
-        { 
+        {
+            
+            //Increase minutes by 1
+
+            if (Minute == 59)
+            {
+                Minute = 0;
+                Hour++;
+            }
+
+            if (Minute == 59 && Hour == 23)
+            {
+                Minute = 0;
+                Hour = 0;
+            }
+
+            Minute++;
+            
+            //Check if alarm time equals now time
+
+            if (Hour == AlarmHour && Minute == AlarmMinute)
+            {
+                return true;
+            }
+
+            else 
+            {
+                return false;
+            }
         }
 
         public string ToString()
