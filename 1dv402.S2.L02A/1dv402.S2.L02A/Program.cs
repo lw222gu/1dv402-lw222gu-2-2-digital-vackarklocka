@@ -43,7 +43,6 @@ namespace _1dv402.S2.L02A
 
             //Test 4. Test av metoden TickTock()
             Console.WriteLine("═══════════════════════════════════════════════════════════════════════════════");
-            testClock = new AlarmClock();
             testClock.Hour = 23;
             testClock.Minute = 58;
             ViewTestHeader("\nTest 4. \nTest av metoden TickTock(). Ställer befintligt AlarmClock-objekt till 23:58 och låter den gå 13 minuter.");
@@ -51,7 +50,6 @@ namespace _1dv402.S2.L02A
 
             //Test 5. Testar alarmfunktionen
             Console.WriteLine("═══════════════════════════════════════════════════════════════════════════════");
-            testClock = new AlarmClock(6, 12, 6, 15);
             testClock.Hour = 6;
             testClock.Minute = 12;
             testClock.AlarmHour = 6;
