@@ -59,15 +59,71 @@ namespace _1dv402.S2.L02A
 
             //Test 6. Test av egenskaperna så att undantag kastas då tid och alarmtid tilldelats felaktiga värden
             Console.WriteLine("═════════════════════════════════════════");
-            testClock = new AlarmClock(24, 70, 24, 70);
             ViewTestHeader("/nTest 6. /nTestar egenskaperna så att undantag kastas då tid och alarmtid tilldelas felaktiga värden");
-            ViewErrorMessage();
+
+            try
+            {
+                testClock.Hour = 24;
+            }
+
+            catch (ArgumentException)
+            {
+                ViewErrorMessage("Timmen är inte i intervallet 0-23.");
+            }
+
+            try
+            {
+                testClock.Minute = 60;
+            }
+
+            catch (ArgumentException)
+            {
+                ViewErrorMessage("Minuterna är inte i intervallet 00-59.");
+            }
+
+            try
+            {
+                testClock.AlarmHour = 24;
+            }
+
+            catch (ArgumentException)
+            {
+                ViewErrorMessage("Timmen är inte i intervallet 0-23.");
+            }
+
+            try
+            {
+                testClock.AlarmMinute = 60;
+            }
+
+            catch (ArgumentException)
+            {
+                ViewErrorMessage("Minuterna är inte i intervallet 00-59.");
+            }
 
             //Test 7. Test av konstruktorer så att undantag kastas då tid och alarmtid tilldelas felaktiga värden.
             Console.WriteLine("═════════════════════════════════════════");
-            testClock = new AlarmClock(24, 70, 24, 70);
             ViewTestHeader("/nTest 1. /nTestar konstruktorerna så att undantag kastas då tid och alarmtid tilldelas felaktiga värden");
-            ViewErrorMessage();
+
+            try 
+            {
+                testClock = new AlarmClock(25, 70, 23, 59);
+            }
+            
+            catch (ArgumentException)
+            {
+                ViewErrorMessage("Timmarna och/eller minuterna för klockslaget är inte i intervallen 0-23 respektive 0-59");
+            }
+
+            try
+            {
+                testClock = new AlarmClock(23, 59, 25, 70);
+            }
+
+            catch (ArgumentException)
+            {
+                ViewErrorMessage("Timmarna och/eller minuterna för alarmtiden är inte i intervallen 0-23 respektive 0-59");
+            }
         }
         
         private static void Run(AlarmClock ac, int minutes)
@@ -89,7 +145,10 @@ namespace _1dv402.S2.L02A
         }
 
         private static void ViewErrorMessage(string message)
-        { 
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ResetColor();
         }
 
         private static void ViewTestHeader(string header)
