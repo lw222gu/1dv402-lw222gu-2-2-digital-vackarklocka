@@ -13,7 +13,7 @@ namespace _1dv402.S2.L02A
         private int _hour;
         private int _minute;
 
-        //Properties
+        //Egenskaper
 
         public int AlarmHour
         {
@@ -63,7 +63,7 @@ namespace _1dv402.S2.L02A
                 }
         }
 
-        //Constructors
+        //Konstruktorer
 
         public AlarmClock()
             :this(0,0)
@@ -83,12 +83,12 @@ namespace _1dv402.S2.L02A
             AlarmMinute = alarmMinute;
         }
 
-        //Methods
+        //Metoder
 
         public bool TickTock()
         {
             
-            //Increase minutes by 1
+            //Öka med en minut
 
             if (Minute < 59)
             {
@@ -112,7 +112,7 @@ namespace _1dv402.S2.L02A
             }
 
             
-            //Check if alarm time equals now time
+            //Kontrollera om alarmtiden är densamma som tiden
 
             if (Hour == AlarmHour && Minute == AlarmMinute)
             {
@@ -125,8 +125,8 @@ namespace _1dv402.S2.L02A
             }
         }
 
-        public string ToString()
-        { 
+        public override string ToString()
+        {
             return String.Format("{0}:{1:D2} ({2}:{3:D2})", Hour, Minute, AlarmHour, AlarmMinute);
         }
     }

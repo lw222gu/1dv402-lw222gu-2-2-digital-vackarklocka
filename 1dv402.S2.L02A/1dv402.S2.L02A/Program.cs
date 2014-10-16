@@ -20,9 +20,6 @@ namespace _1dv402.S2.L02A
             Console.WriteLine(" ╚═══════════════════════════════════════╝ ");
             Console.ResetColor();
 
-            //Initiera objektet ac
-            AlarmClock ac = new AlarmClock();
-
             //Test 1: Test av standardkonstruktorn
             Console.WriteLine("═══════════════════════════════════════════════════════════════════════════════");
             AlarmClock testClock = new AlarmClock();
@@ -130,21 +127,25 @@ namespace _1dv402.S2.L02A
                 ViewErrorMessage("Timmarna och/eller minuterna för alarmtiden är inte i intervallen 0-23 respektive 0-59");
             }
         }
+
+        //Initiera objektet ac
+        AlarmClock ac = new AlarmClock();
         
         private static void Run(AlarmClock ac, int minutes)
         {
             for (int i = 0; i < minutes; i++)
             {
-                if (ac.TickTock() == true)
+                
+                if (ac.TickTock())
                 {
                     Console.BackgroundColor = ConsoleColor.Blue;
-                    Console.WriteLine(ac.ToString() + " BEEP! BEEP! BEEP! BEEP!");
+                    Console.WriteLine("{0} BEEP! BEEP! BEEP! BEEP!", ac);
                     Console.ResetColor();
                 }
 
                 else
                 {
-                    Console.WriteLine(ac.ToString());
+                    Console.WriteLine(ac);
                 }
             }
         }
