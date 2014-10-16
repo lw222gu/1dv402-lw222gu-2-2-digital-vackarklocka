@@ -19,9 +19,9 @@ namespace _1dv402.S2.L02A
         {
             get { return _alarmHour;  }
             set {
-                    if (_alarmHour < 0 || _alarmHour > 23)
+                    if (value < 0 || value > 23)
                     {
-                        throw new ArgumentException();
+                        throw new ArgumentException("Timmen är inte i intervallet 0-23.");
                     } 
                     _alarmHour = value; 
                 }
@@ -31,11 +31,11 @@ namespace _1dv402.S2.L02A
         {
             get { return _alarmMinute; }
             set {
-                    if (_alarmMinute < 0 || _alarmMinute > 59)
+                    if (value < 0 || value > 59)
                     {
-                        throw new ArgumentException();
+                        throw new ArgumentException("Minuterna är inte i intervallet 00-59."); 
                     }
-                    _alarmMinute = value; 
+                    _alarmMinute = value;
                 }
         }
 
@@ -43,9 +43,9 @@ namespace _1dv402.S2.L02A
         {
             get { return _hour; }
             set {
-                    if (_hour < 0 || _hour > 23)
+                    if (0 > value || value > 23)
                     {
-                        throw new ArgumentException();
+                        throw new ArgumentException("Timmen är inte i intervallet 0-23.");
                     }
                     _hour = value; 
                 }
@@ -55,9 +55,9 @@ namespace _1dv402.S2.L02A
         {
             get { return _minute; }
             set {
-                    if (_minute < 0 || _minute > 59)
+                    if (value < 0 || value > 59)
                     {
-                        throw new ArgumentException();
+                        throw new ArgumentException("Minuterna är inte i intervallet 00-59.");
                     }
                     _minute = value; 
                 }
@@ -77,10 +77,10 @@ namespace _1dv402.S2.L02A
 
         public AlarmClock(int hour, int minute, int alarmHour, int alarmMinute)
         {
-            hour = Hour;
-            minute = Minute;
-            alarmHour = AlarmHour;
-            alarmMinute = AlarmMinute;
+            Hour = hour;
+            Minute = minute;
+            AlarmHour = alarmHour;
+            AlarmMinute = alarmMinute;
         }
 
         //Methods
@@ -90,19 +90,27 @@ namespace _1dv402.S2.L02A
             
             //Increase minutes by 1
 
-            if (Minute == 59)
+            if (Minute < 59)
             {
-                Minute = 0;
-                Hour++;
+                Minute++;
             }
 
-            if (Minute == 59 && Hour == 23)
+            else
             {
                 Minute = 0;
-                Hour = 0;
+
+                if (Hour < 23)
+                {
+                    Hour++;
+                }
+
+                else
+                {
+                    Hour = 0;
+                }
+                
             }
 
-            Minute++;
             
             //Check if alarm time equals now time
 
@@ -119,6 +127,7 @@ namespace _1dv402.S2.L02A
 
         public string ToString()
         { 
+            return String.Format("{0}:{1:D2} ({2}:{3:D2})", Hour, Minute, AlarmHour, AlarmMinute);
         }
     }
 }

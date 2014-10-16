@@ -23,87 +23,92 @@ namespace _1dv402.S2.L02A
             //Initiera objektet ac
             AlarmClock ac = new AlarmClock();
 
-
             //Test 1: Test av standardkonstruktorn
-            Console.WriteLine("═════════════════════════════════════════");
+            Console.WriteLine("═══════════════════════════════════════════════════════════════════════════════");
             AlarmClock testClock = new AlarmClock();
-            ViewTestHeader("/nTest 1. /nTest av standardkonstruktorn");
+            ViewTestHeader("\nTest 1. \nTest av standardkonstruktorn");
             string time = testClock.ToString();
             Console.WriteLine(time);
 
             //Test 2. Test av konstruktorn med två parametrar
-            Console.WriteLine("═════════════════════════════════════════");
+            Console.WriteLine("═══════════════════════════════════════════════════════════════════════════════");
             testClock = new AlarmClock(9, 42);
-            ViewTestHeader("/nTest 2. /nTest av konstruktorn med två parametrar (9, 42)");
+            ViewTestHeader("\nTest 2. \nTest av konstruktorn med två parametrar (9, 42)");
             time = testClock.ToString();
             Console.WriteLine(time);
 
             //Test 3. Test av konstruktorn med fyra parametrar
-            Console.WriteLine("═════════════════════════════════════════");
+            Console.WriteLine("═══════════════════════════════════════════════════════════════════════════════");
             testClock = new AlarmClock(13, 24, 7, 35);
-            ViewTestHeader("/nTest 3. /nTest av konstruktorn med fyra parametrar (13, 24, 7, 35)");
+            ViewTestHeader("\nTest 3. \nTest av konstruktorn med fyra parametrar (13, 24, 7, 35)");
             time = testClock.ToString();
             Console.WriteLine(time);
 
             //Test 4. Test av metoden TickTock()
-            Console.WriteLine("═════════════════════════════════════════");
-            testClock = new AlarmClock(23, 58, 7, 35);
-            ViewTestHeader("/nTest 4. /nTest av metoden TickTock(). Ställer befintligt AlarmClock-objekt till 23:58 och låter den gå 13 minuter.");
+            Console.WriteLine("═══════════════════════════════════════════════════════════════════════════════");
+            testClock = new AlarmClock();
+            testClock.Hour = 23;
+            testClock.Minute = 58;
+            ViewTestHeader("\nTest 4. \nTest av metoden TickTock(). Ställer befintligt AlarmClock-objekt till 23:58 och låter den gå 13 minuter.");
             Run(testClock, 13);
 
             //Test 5. Testar alarmfunktionen
-            Console.WriteLine("═════════════════════════════════════════");
+            Console.WriteLine("═══════════════════════════════════════════════════════════════════════════════");
             testClock = new AlarmClock(6, 12, 6, 15);
-            ViewTestHeader("/nTest 5. /nStäller tiden till 6:12 och alarmet till 6:15 och låter tiden gå 6 minuter");
+            testClock.Hour = 6;
+            testClock.Minute = 12;
+            testClock.AlarmHour = 6;
+            testClock.AlarmMinute = 15;
+            ViewTestHeader("\nTest 5. \nStäller tiden till 6:12 och alarmet till 6:15 och låter tiden gå 6 minuter");
             Run(testClock, 6);
 
             //Test 6. Test av egenskaperna så att undantag kastas då tid och alarmtid tilldelats felaktiga värden
-            Console.WriteLine("═════════════════════════════════════════");
-            ViewTestHeader("/nTest 6. /nTestar egenskaperna så att undantag kastas då tid och alarmtid tilldelas felaktiga värden");
+            Console.WriteLine("═══════════════════════════════════════════════════════════════════════════════");
+            ViewTestHeader("\nTest 6. \nTestar egenskaperna så att undantag kastas då tid och alarmtid tilldelas felaktiga värden");
 
             try
             {
-                testClock.Hour = 24;
+                testClock.Hour = 30;
             }
 
-            catch (ArgumentException)
+            catch (ArgumentException ex)
             {
-                ViewErrorMessage("Timmen är inte i intervallet 0-23.");
-            }
-
-            try
-            {
-                testClock.Minute = 60;
-            }
-
-            catch (ArgumentException)
-            {
-                ViewErrorMessage("Minuterna är inte i intervallet 00-59.");
+                ViewErrorMessage(ex.Message);
             }
 
             try
             {
-                testClock.AlarmHour = 24;
+                testClock.Minute = 70;
             }
 
-            catch (ArgumentException)
+            catch (ArgumentException ex)
             {
-                ViewErrorMessage("Timmen är inte i intervallet 0-23.");
+                ViewErrorMessage(ex.Message);
             }
 
             try
             {
-                testClock.AlarmMinute = 60;
+                testClock.AlarmHour = 30;
             }
 
-            catch (ArgumentException)
+            catch (ArgumentException ex)
             {
-                ViewErrorMessage("Minuterna är inte i intervallet 00-59.");
+                ViewErrorMessage(ex.Message);
+            }
+
+            try
+            {
+                testClock.AlarmMinute = 70;
+            }
+
+            catch (ArgumentException ex)
+            {
+                ViewErrorMessage(ex.Message);
             }
 
             //Test 7. Test av konstruktorer så att undantag kastas då tid och alarmtid tilldelas felaktiga värden.
-            Console.WriteLine("═════════════════════════════════════════");
-            ViewTestHeader("/nTest 1. /nTestar konstruktorerna så att undantag kastas då tid och alarmtid tilldelas felaktiga värden");
+            Console.WriteLine("═══════════════════════════════════════════════════════════════════════════════");
+            ViewTestHeader("\nTest 1. \nTestar konstruktorerna så att undantag kastas då tid och alarmtid tilldelas felaktiga värden");
 
             try 
             {
@@ -133,7 +138,7 @@ namespace _1dv402.S2.L02A
                 if (ac.TickTock() == true)
                 {
                     Console.BackgroundColor = ConsoleColor.Blue;
-                    Console.WriteLine(ac.ToString() + "BEEP! BEEP! BEEP! BEEP!");
+                    Console.WriteLine(ac.ToString() + " BEEP! BEEP! BEEP! BEEP!");
                     Console.ResetColor();
                 }
 
