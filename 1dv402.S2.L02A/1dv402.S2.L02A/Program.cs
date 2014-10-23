@@ -103,26 +103,26 @@ namespace _1dv402.S2.L02A
 
             //Test 7. Test av konstruktorer så att undantag kastas då tid och alarmtid tilldelas felaktiga värden.
             Console.WriteLine("═══════════════════════════════════════════════════════════════════════════════");
-            ViewTestHeader("\nTest 1. \nTestar konstruktorerna så att undantag kastas då tid och alarmtid tilldelas felaktiga värden");
+            ViewTestHeader("\nTest 7. \nTestar konstruktorerna så att undantag kastas då tid och alarmtid tilldelas felaktiga värden");
 
             try 
             {
-                testClock = new AlarmClock(25, 70, 23, 59);
+                testClock = new AlarmClock(25, 0, 0, 0);
             }
             
-            catch (ArgumentException)
+            catch (ArgumentException ex)
             {
-                ViewErrorMessage("Timmarna och/eller minuterna för klockslaget är inte i intervallen 0-23 respektive 0-59");
+                ViewErrorMessage(ex.Message);
             }
 
             try
             {
-                testClock = new AlarmClock(23, 59, 25, 70);
+                testClock = new AlarmClock(0, 0, 25, 0);
             }
 
-            catch (ArgumentException)
+            catch (ArgumentException ex)
             {
-                ViewErrorMessage("Timmarna och/eller minuterna för alarmtiden är inte i intervallen 0-23 respektive 0-59");
+                ViewErrorMessage(ex.Message);
             }
         }
 
